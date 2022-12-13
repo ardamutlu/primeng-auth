@@ -6,8 +6,13 @@ const Routing: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/profile/overview',
     pathMatch: 'full',
   },
   {
