@@ -65,6 +65,21 @@ export class AuthService implements OnDestroy {
     );
   }
 
+  registration(user: UserModel): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.authHttpService.createUser(user).pipe(
+      map(() => {
+        this.isLoadingSubject.next(false);
+      }),
+      switchMap(() => this.login(user.email, user.password)),
+      catchError((err) => {
+        console.error('err', err);
+        return of(undefined);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
   logout() {
     localStorage.removeItem(this.localStorageKey);
     this.router.navigate(['/auth/login']);

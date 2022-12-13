@@ -121,6 +121,13 @@
           <div class="indicator-label">Continue</div>
         </ng-container>
       </button>
+
+      <div class="text-center mt-5">
+        <div>
+          New Here?
+          <a routerLink="/auth/registration">Sign Up</a>
+        </div>
+      </div>
     </p-card>
   </div>
 </form>
@@ -134,8 +141,6 @@
   <ng-container
     *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
   >
-    <small id="username2-help" class="p-invalid text-red-500">{{
-      message
-    }}</small>
+    <small id="form-help" class="p-invalid text-red-500">{{ message }}</small>
   </ng-container>
 </ng-template>

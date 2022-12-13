@@ -7,7 +7,7 @@ import { UserModel } from '../models/user.model';
 import { AuthModel } from '../models/auth.model';
 import { UsersTable } from 'src/app/_fake/users.table';
 
-const API_USERS_URL = 'api/users';
+const API_URL = 'api/users';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +45,13 @@ export class AuthHTTPService {
     );
   }
 
+  createUser(user: UserModel): Observable<any> {
+    user.access_token = `${Math.random()}`;
+    user.expires_date = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
+
+    return this.http.post<UserModel>(API_URL, user);
+  }
+
   getUserByToken(token: string): Observable<UserModel | undefined> {
     const user = UsersTable.users.find((u: UserModel) => {
       return u.access_token === token;
@@ -58,6 +65,6 @@ export class AuthHTTPService {
   }
 
   getAllUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(API_USERS_URL);
+    return this.http.get<UserModel[]>(API_URL);
   }
 }

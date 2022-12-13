@@ -9,7 +9,7 @@ export class UserModel extends AuthModel {
   firstname: string;
   lastname: string;
 
-  setUser(_user: UserModel) {
+  setUser(_user: any) {
     this.id = _user.id;
     this.username = _user.username;
     this.password = _user.password;
